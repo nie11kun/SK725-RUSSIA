@@ -86,8 +86,8 @@
 85026 0 0 "X safe position [mm]" ;R12
 85027 0 0 "X back distance [mm]" ;R13
 85028 0 0 "X DRF value [mm]" ;R14
-85029 0 0 "Left Z coordinate [mm]" ;R15
-85030 0 0 "Right Z coordinate [mm]" ;R16
+85029 0 0 "Right Z coordinate [mm]" ;R15
+85030 0 0 "Left Z coordinate [mm]" ;R16
 85031 0 0 "Pos. C thread relief [deg]" ;R17
 85032 0 0 "Pos. B relief grinding [deg]" ;R18
 85033 0 0 "Current wheel speed [rpm]"   ;R12
