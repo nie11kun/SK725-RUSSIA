@@ -1,28 +1,28 @@
 L4000
 IF R0==-1 GOTOF LEFT
-;ÓÒÂÝÎÆ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 RIGHT:
-MSG("Note£ºBegan to adjusting-tool  Please open the DRF£¡") 
+MSG("adjusting started, Please open DRF button") 
 G4 F5
 R14=0
 R60=0  ;C
 R61=0  ;B
 R191=R11
-N10 R192=0  ;¶Ôµ¶´ÎÊý
-N20 G90 G00 C=R17  ;C×ßÆðµã
-        B=R18  ;B×ßÆðµã;´ËÊ±BC²»×ßÁª¶¯
-        Z=R15  ;Z×ßÆðµã 
-G90 G01 X=R191+R13 F800  ;XÖá×ßµ½¶Ôµ¶Öµ
+N10 R192=0  ;ï¿½Ôµï¿½ï¿½ï¿½ï¿½ï¿½
+N20 G90 G00 C=R17  ;Cï¿½ï¿½ï¿½ï¿½ï¿½
+        B=R18  ;Bï¿½ï¿½ï¿½ï¿½ï¿½;ï¿½ï¿½Ê±BCï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        Z=R15  ;Zï¿½ï¿½ï¿½ï¿½ï¿½ 
+G90 G01 X=R191+R13 F800  ;Xï¿½ï¿½ï¿½ßµï¿½ï¿½Ôµï¿½Öµ
 N50 R192=R192+1
-MSG("The No."<<R192<<" of adjusting-tool")
+MSG("processed adjusting "<<R192<<" times")
 N70 G90 G01 X=R191 F800 
 R195=0
 N100 R195=R195+1
 N101 G90 G01 Z=R15-2*R1*(R195-1) F500 
-IF R2==0 ;;;;;;Ö±²Û
+IF R2==0 ;;;;;;Ö±ï¿½ï¿½
 G90 G00 C=R17
 ELSE
-   IF R3==1;;;;;;ÅÐ¶Ï²ÛµÄ×óÓÒÐýÏò
+   IF R3==1;;;;;;ï¿½Ð¶Ï²Ûµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    G90 G00 C=R17+2*(R195-1)*R69
    ELSE
    G90 G00 C=R17-2*(R195-1)*R69
@@ -35,42 +35,42 @@ G64 G91 G01 X=X_JUMPDIS Z=-KEY_JUMP*R1 C=C_JUMP F=R101*360
 G91 G00 X=R13
 TRAILOF(B,C)
 IF R195<Z_TIAO GOTOB N100
-R14=$AC_DRF[X]        ;XÖáµ±Ç°×ø±ê
+R14=$AC_DRF[X]        ;Xï¿½áµ±Ç°ï¿½ï¿½ï¿½ï¿½
 R60=$AC_DRF[C] 
 R67=$AC_DRF[Z] 
 STOPRE
 G01 G91 X=R13 F1000
-G90 G00 C=R17  ;C×ßÆðµã
+G90 G00 C=R17  ;Cï¿½ï¿½ï¿½ï¿½ï¿½
         B=R18
-       Z=R15  ;Z×ßÆðµã 
-IF $A_DBB[1]==1 GOTOB N50        ;ÅÐ¶Ï¶Ôµ¶ÊÇ·ñ½áÊø
+       Z=R15  ;Zï¿½ï¿½ï¿½ï¿½ï¿½ 
+IF $A_DBB[1]==1 GOTOB N50        ;ï¿½Ð¶Ï¶Ôµï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 G90 G01 X=R12 F800
-MSG("End to adjusting-tool  Please close the handwheel and DRF£¡")
+MSG("finished, turn off the handwheel and DRF")
 G4 F3
 DRFOF
 GOTOF END
-;×óÂÝÎÆ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 LEFT:
-MSG("Note£ºBegan to adjusting-tool  Please open the DRF£¡") 
+MSG("adjusting started, Please open DRF button") 
 G4 F5
 R14=0
 R60=0  ;C
 R191=R11
-N1110 R192=0  ;¶Ôµ¶´ÎÊý
-N1120 G90 G00 C=R17  ;C×ßÆðµã
+N1110 R192=0  ;ï¿½Ôµï¿½ï¿½ï¿½ï¿½ï¿½
+N1120 G90 G00 C=R17  ;Cï¿½ï¿½ï¿½ï¿½ï¿½
               B=R18
-        Z=R16      ;Z×ßÆðµã 
-G90 G01 X=R191+R13 F800  ;XÖá×ßµ½¶Ôµ¶Öµ
+        Z=R16      ;Zï¿½ï¿½ï¿½ï¿½ï¿½ 
+G90 G01 X=R191+R13 F800  ;Xï¿½ï¿½ï¿½ßµï¿½ï¿½Ôµï¿½Öµ
 N1150 R192=R192+1
-MSG("The No."<<R192<<" of adjusting-tool")
+MSG("processed adjusting "<<R192<<" times")
 N1170 G90 G01 X=R191 F800 
 R195=0
 N1100 R195=R195+1
 N1101 G90 G01 Z=R15-2*R1*(R195-1) F500 
-IF R2==0 ;;;;;;Ö±²Û
+IF R2==0 ;;;;;;Ö±ï¿½ï¿½
 G90 G00 C=R17
 ELSE
-   IF R3==1;;;;;;ÅÐ¶Ï²ÛµÄ×óÓÒÐýÏò
+   IF R3==1;;;;;;ï¿½Ð¶Ï²Ûµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    G90 G00 C=R17+2*(R195-1)*R69
    ELSE
    G90 G00 C=R17-2*(R195-1)*R69
@@ -84,16 +84,16 @@ G91 G00 X=R13
 TRAILOF(B,C)
 IF R195<Z_TIAO GOTOB N1100
 STOPRE
-R14=$AC_DRF[X]        ;XÖáµ±Ç°×ø±ê
+R14=$AC_DRF[X]        ;Xï¿½áµ±Ç°ï¿½ï¿½ï¿½ï¿½
 R60=$AC_DRF[C] 
 R67=$AC_DRF[Z] 
 STOPRE
 G01 G91 X=R13 F1000
-G90 G00 C=R17  ;C×ßÆðµã
-        Z=R16  ;Z×ßÆðµã 
-IF $A_DBB[1]==1 GOTOB N1150        ;ÅÐ¶Ï¶Ôµ¶ÊÇ·ñ½áÊø
+G90 G00 C=R17  ;Cï¿½ï¿½ï¿½ï¿½ï¿½
+        Z=R16  ;Zï¿½ï¿½ï¿½ï¿½ï¿½ 
+IF $A_DBB[1]==1 GOTOB N1150        ;ï¿½Ð¶Ï¶Ôµï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 G90 G01 X=R12 F800
-MSG("End to adjusting-tool  Please close the handwheel and DRF£¡")
+MSG("finished, turn off the handwheel and DRF")
 G4 F3
 DRFOF
 END: 

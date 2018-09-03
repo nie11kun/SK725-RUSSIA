@@ -1,7 +1,7 @@
 IF R82<R83 GOTOF ERROR
-R299=(60000*R223)/ ($PI*R82)  ;µ¥ÏßÐÞÕûÊ±×ªËÙ
+R299=(60000*R223)/ ($PI*R82)  ;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±×ªï¿½ï¿½
 GOTOF END
-ERROR:MSG("Diameter of wheel is small of"<<R83<<"mm  Please change the new wheel!!!")
+ERROR:MSG("Diameter of wheel is small than "<<R83<<"mm  Please setup a new wheel!!!")
 END2:
 G4 F900000
 END:
