@@ -1,0 +1,115 @@
+L4000
+IF R0==-1 GOTOF LEFT
+;右螺纹
+RIGHT:
+MSG("Note：Began to adjusting-tool  Please open the DRF！") 
+G4 F5
+R14=0
+R60=0  ;C
+R61=0  ;B
+R191=R11
+N10 R192=0  ;对刀次数
+N20 G90 G00 C=R17  ;C走起点
+        B=R18  ;B走起点;此时BC不走联动
+        Z=R15  ;Z走起点 
+G90 G01 X=R191+R13 F800  ;X轴走到对刀值
+N50 R192=R192+1
+MSG("The No."<<R192<<" of adjusting-tool")
+N70 G90 G01 X=R191 F800 
+R195=0
+N100 R195=R195+1
+N101 G90 G01 Z=R15-2*R1*(R195-1) F500 
+IF R2==0 ;;;;;;直槽
+G90 G00 C=R17
+ELSE
+   IF R3==1;;;;;;判断槽的左右旋向
+   G90 G00 C=R17+2*(R195-1)*R69
+   ELSE
+   G90 G00 C=R17-2*(R195-1)*R69
+   ENDIF
+ENDIF
+B=R18  
+G01 G90 X=R191 F=800
+TRAILON(B,C,KEY)
+G64 G91 G01 X=X_JUMPDIS Z=-KEY_JUMP*R1 C=C_JUMP F=R101*360 
+G91 G00 X=R13
+TRAILOF(B,C)
+IF R195<Z_TIAO GOTOB N100
+R14=$AC_DRF[X]        ;X轴当前坐标
+R60=$AC_DRF[C] 
+R67=$AC_DRF[Z] 
+STOPRE
+G01 G91 X=R13 F1000
+G90 G00 C=R17  ;C走起点
+        B=R18
+       Z=R15  ;Z走起点 
+IF $A_DBB[1]==1 GOTOB N50        ;判断对刀是否结束
+G90 G01 X=R12 F800
+MSG("End to adjusting-tool  Please close the handwheel and DRF！")
+G4 F3
+DRFOF
+GOTOF END
+;左螺纹
+LEFT:
+MSG("Note：Began to adjusting-tool  Please open the DRF！") 
+G4 F5
+R14=0
+R60=0  ;C
+R191=R11
+N1110 R192=0  ;对刀次数
+N1120 G90 G00 C=R17  ;C走起点
+              B=R18
+        Z=R16      ;Z走起点 
+G90 G01 X=R191+R13 F800  ;X轴走到对刀值
+N1150 R192=R192+1
+MSG("The No."<<R192<<" of adjusting-tool")
+N1170 G90 G01 X=R191 F800 
+R195=0
+N1100 R195=R195+1
+N1101 G90 G01 Z=R15-2*R1*(R195-1) F500 
+IF R2==0 ;;;;;;直槽
+G90 G00 C=R17
+ELSE
+   IF R3==1;;;;;;判断槽的左右旋向
+   G90 G00 C=R17+2*(R195-1)*R69
+   ELSE
+   G90 G00 C=R17-2*(R195-1)*R69
+   ENDIF
+ENDIF
+B=R18
+G01 G90 X=R191 F=800
+TRAILOF(B,C)
+G64 G91 G01 X=X_JUMPDIS Z=KEY_JUMP*R1 C=C_JUMP F=R101*360 
+G91 G00 X=R13
+TRAILOF(B,C)
+IF R195<Z_TIAO GOTOB N1100
+STOPRE
+R14=$AC_DRF[X]        ;X轴当前坐标
+R60=$AC_DRF[C] 
+R67=$AC_DRF[Z] 
+STOPRE
+G01 G91 X=R13 F1000
+G90 G00 C=R17  ;C走起点
+        Z=R16  ;Z走起点 
+IF $A_DBB[1]==1 GOTOB N1150        ;判断对刀是否结束
+G90 G01 X=R12 F800
+MSG("End to adjusting-tool  Please close the handwheel and DRF！")
+G4 F3
+DRFOF
+END: 
+R15=R15+R67
+R16=R16+R67
+R17=R17+R60
+IF R17<0
+R17=360+R17
+ELSE
+  IF R17>=360
+  R17=R17-360
+  ELSE
+  R17=R17
+  ENDIF
+ENDIF
+M17
+
+
+

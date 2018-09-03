@@ -1,0 +1,36 @@
+;;;;;;任何类型通用
+IF R63==0  ;如果单位是毫米
+R64=R1*R8
+DUO[30]=R1
+ELSE
+R64=(25.4*R1)*R8
+DUO[30]=25.4*R1
+ENDIF
+
+Z_DIS=ABS(R15-R16)          ;从右R15向左R16磨
+Z_TIAO=ROUNDUP(Z_DIS/(2*R1))
+Z_TIAO=Z_TIAO-1
+ZHUIDU=0.5*(R10/R19)*R62*R0  ;无锥度时，R60为零
+X_DIS=ZHUIDU*Z_DIS   
+X_JUMPDIS=ZHUIDU*R1 
+C_NUM=Z_DIS/R64
+X_ZHUIDU=X_DIS/C_NUM
+C_RUN=360*C_NUM
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+C_JUMP=(R4-1)*360/R4+(360/R4)/2
+KEY_JUMP=C_JUMP/360
+DUO[31]=($PI*R66)/TAN(R5);;;
+R68=DUO[31]/DUO[30];
+R69=360/R68;;;;;;
+
+
+;;;;;;不通用
+IF R2==0       ;判断直槽还是螺旋槽
+KEY=R4
+ELSE
+KEY=R4*COS(R7+R0*R3*R5)/(COS(R5)*COS(R7))
+ENDIF
+M17
+
+
+

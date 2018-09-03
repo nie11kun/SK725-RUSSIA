@@ -1,0 +1,22 @@
+IF R65==1
+GOTOF FIRST
+ELSE
+GOTOF SECOND
+ENDIF
+FIRST:
+IF DUO[20]<DUO[21] GOTOF ERROR1
+R299= (60000*R102)/ ($PI*DUO[20]) ;磨削时转速
+GOTOF END
+ERROR1:MSG("Diameter of wheel is small of"<<DUO[21]<<"mm  Please change the new wheel!!!")
+END1:G4 F900000
+SECOND:
+IF R82<R83 GOTOF ERROR2
+R299= (60000*R102)/ ($PI*R82) ;磨削时转速
+ENDIF
+GOTOF END
+ERROR2:MSG("Diameter of wheel is small of"<<R83<<"mm  Please change the new wheel!!!")
+END2:G4 F900000
+END:
+M17
+
+

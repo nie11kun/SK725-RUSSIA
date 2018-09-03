@@ -1,0 +1,12 @@
+PROC C_EXITWORK DISPLOF
+;***********程序功能**********
+;*退出工件动作
+;****************************
+
+MSG("do not reset system!")
+IF GRIND[2]<>2;不对刀,手动,或自动+手动
+    G01 G90 X=R12 F=INI[54];退刀时的X值
+ENDIF
+
+RET
+

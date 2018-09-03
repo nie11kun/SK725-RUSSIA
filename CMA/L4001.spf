@@ -1,0 +1,20 @@
+IF R82<R83 GOTOF ERROR
+R299=(60000*R223)/ ($PI*R82)  ;单线修整时转速
+GOTOF END
+ERROR:MSG("Diameter of wheel is small of"<<R83<<"mm  Please change the new wheel!!!")
+END2:
+G4 F900000
+END:
+M17
+
+
+
+
+
+
+
+
+
+
+
+

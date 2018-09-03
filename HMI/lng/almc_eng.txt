@@ -1,0 +1,227 @@
+﻿// compile cycle alarme
+// CP = 1252
+// IDEO = NO
+// ANSI = YES
+// UNICODE = NO
+
+// ALARM TEXT 
+89901 0 0 "Disk A"
+89902 0 0 "Disk _"
+89903 0 0 "Disk _"
+89904 0 0 "Disk _"
+
+85500   0   0   "Engrav.%ncycle"
+85501   0   0   "Alternat."
+85502   0   0   "Cancel"
+85503   0   0   "Ok"
+85510   0   0   "Engraving cycle"
+85511   0   0   "Actual tool"
+85512   0   0   ""
+85513   0   0   ""
+85514   0   0   ""
+85515   0   0   ""
+85516   0   0   ""
+85517   0   0   ""
+85518   0   0   ""
+85519   0   0   ""
+// Lang- Kurztexte
+85520   0   0   "Tool name"
+85521   0   0   "1.cutter/2.cutter"
+85522   0   0   "Engraving text"
+85523   0   0   "Reset level, absolute"
+85524   0   0   "Safety distance, without digit sign"
+85525   0   0   "Text"
+85526   0   0   ""
+85527   0   0   "Reset level"
+85528   0   0   "Safety distance"
+85529   0   0   "Engraving depth"
+85530   0   0   "Font size"
+85531   0   0   "Factor font distance"
+85532   0   0   "Start position X"
+85533   0   0   "Start position Y"
+85534   0   0   "Immersion feed"
+85535   0   0   "Milling feed"
+85536   0   0   "Font distance"
+85537   0   0   "Reference surface"
+85538   0   0   "Font distance"
+// Meldungen
+85539   0   0   "Save"
+
+
+;////////////////////////////////先从此处开始修改
+85000 0 0 "H.J.interface"
+85001 0 0 "Basic data1"
+85002 0 0 "Basic data2"
+85003 0 0 "Grinding data"
+85004 0 0 "Multi-rib parameter"
+85005 0 0 "Sing.-rib parameter"
+85006 0 0 "Profile parameter"
+85007 0 0 "Groove"
+85008 0 0 "BACK"
+85009 0 0 "";
+85301 0 0 "cut 1 to 5"
+85302 0 0 "cut 6 to 10"
+85303 0 0 "cut 11 to 15"
+
+
+;MASK1:基本数据////////////////////////////
+85010 0 0 ":"
+85011 0 0 "----------------------------------------------------------------";60
+85012 0 0 "================================================================";58
+85013 0 0 "***********************************************************";60
+;/////左排
+85014 0 0 "Pitch of thread" ;R1
+85015 0 0 "Number of flutes" ;R4
+85016 0 0 "Taper" ;R10/R19
+85017 0 0 "Straight or spiral?";R2
+85018 0 0 "Direction of flute lead" ;R3[1右 -1左 ]
+85019 0 0 "Flute lead [deg]" ;R5
+85020 0 0 "Flute lead [mm]" ;R6
+85021 0 0 "Direction of thread" ;R0[1右 -1左 ]
+85022 0 0 "Thread helix [deg]" ;R7
+85023 0 0 "Thread lead [mm]" ;R8
+;/////右排
+85024 0 0 "State" ;R9
+85025 0 0 "X coordinate [mm]" ;R11
+85026 0 0 "X safe position [mm]" ;R12
+85027 0 0 "X back distance [mm]" ;R13
+85028 0 0 "X DRF value [mm]" ;R14
+85029 0 0 "Left Z coordinate [mm]" ;R15
+85030 0 0 "Right Z coordinate [mm]" ;R16
+85031 0 0 "Pos. C thread relief [deg]" ;R17
+85032 0 0 "Pos. B relief grinding [deg]" ;R18
+85033 0 0 "Current wheel speed [rpm]"   ;R12
+85034 0 0 "Straight"  ;R
+85035 0 0 "Spiral"  ;R
+85036 0 0 "Left"
+85037 0 0 "Right"
+85038 0 0 "Grinding"
+85039 0 0 "Adjust"
+85041 0 0 ""
+85042 0 0 "Unit"
+85043 0 0 "mm"
+85044 0 0 "inch"
+85045 0 0 "Taper type"
+85145 0 0 "taper"
+85146 0 0 "back taper"
+85147 0 0 "without"
+85148 0 0 "C DRF value [mm]"
+85149 0 0 "B DRF value [mm]"
+85150 0 0 "No.of head"
+85151 0 0 "Single/Multi-rib？"
+85152 0 0 "Single"
+85153 0 0 "Multi"
+
+;MASK2/MASK3/MASK4:磨削数据1/磨削数据2/磨削数据3/////////////////
+85046 0 0 "Cut activate ON/OFF?"     ;R
+85047 0 0 "Workpiece speed [rpm]"    ;R101
+85048 0 0 "W.linear speed of grinding[m/s]"  ;R102
+85049 0 0 "Infeed X [mm]"     ;R103
+85050 0 0 "Dressing activate ON/OFF?" ;R105
+85051 0 0 "Infeed V [mm]"   ;R106
+85052 0 0 "No.of infeed"         ;R107
+85053 0 0 "W.linear speed of dressing[m/s]" ;R108
+85054 0 0 "Infeed speed [mm/min]"  ;R109
+85055 0 0 "NO.1 "   ;R
+85056 0 0 "NO.2 "   ;R
+85057 0 0 "NO.3 "   ;R
+85058 0 0 "NO.4 "   ;R
+85059 0 0 "NO.5 "   ;R
+85060 0 0 "NO.6 "   ;R
+85061 0 0 "NO.7 "   ;R
+85062 0 0 "NO.8 "   ;R
+85063 0 0 "NO.9 "   ;R
+85064 0 0 "NO.10 "  ;R
+85065 0 0 "NO.11 "  ;R
+85066 0 0 "NO.12 "  ;R
+85067 0 0 "ON"  ;
+85068 0 0 "OFF"  ;
+85069 0 0 "NO.13"  ;
+85070 0 0 "NO.14"  ;
+85170 0 0 "NO.15"  ;
+85171 0 0 "infeed stop time[s]" 
+
+
+
+;MASK5:修整参数//////////////
+85071 0 0 "V1—new wheel position [mm]" ;R80
+85072 0 0 "V2—V coordinate [mm]"       ;R78
+85073 0 0 "W1—W coordinate [mm]"      ;R79
+85074 0 0 "New wheel or not?"            ;R76
+85075 0 0 "W.linear speed of dressing[m/s]"       ;R77
+85076 0 0 "Cutting depths [mm]"            ;R71
+85077 0 0 "No.of cut"              ;R70 
+85078 0 0 "Diameter wheel [mm]"          ;R82  
+85079 0 0 "Min.diameter [mm]"  ;R83  
+85080 0 0 "Wh.speed in dressing [rpm]"   ;R298  
+;85081 0 0 "[mm]"        ;R74
+;85082 0 0 "[m/s]" ;R75     
+;85083 0 0 "[rpm]"   ;R299     
+85084 0 0 "New"
+85085 0 0 "Old"
+85086 0 0 "Cutting speed [mm/min]" ;R72
+85087 0 0 ""
+85088 0 0 ""
+85089 0 0 ""
+85090 0 0 ""
+
+;MASK6:齿形参数//////////////
+85091 0 0 "Profile selection"           ;R85
+85092 0 0 "Circular radius of cru.[mm]" ;R86
+85093 0 0 "α1 —LH flank angle [deg]"    ;R87
+85094 0 0 "α2 —RH flank angle [deg]"    ;R88
+85095 0 0 ""         ;R98
+85096 0 0 "c —Wheel width [mm]"       ;R81
+85097 0 0 "b —Tooth height [mm]"           ;R89
+85098 0 0 "[mm]"     ;R90
+85099 0 0 "No.1"
+85100 0 0 "a [mm]"         ;R91
+85101 0 0 "No.2"
+85102 0 0 "a [mm]"         ;R92
+85103 0 0 "β1 [mm]"     ;R93
+85104 0 0 "β2 [mm]"     ;R94
+
+85105 0 0 "Gring type"
+85106 0 0 "Tap"
+85107 0 0 "Groove"
+85108 0 0 "Pitch"
+85109 0 0 "NO.of Groove"
+85110 0 0 "Right Position"
+85111 0 0 "Safe Position"
+85112 0 0 "Back Position"
+85113 0 0 "Taper"
+85114 0 0 "Current touch"
+85115 0 0 "Initial touch"
+85116 0 0 "Rough"
+85117 0 0 "Fine"
+85118 0 0 "精磨"
+85119 0 0 "终磨"
+85120 0 0 ""
+85121 0 0 ""
+85122 0 0 ""
+85123 0 0 ""
+85124 0 0 "Groove"
+
+85125 0 0 "P.D."
+85126 0 0 "NO"
+85127 0 0 "YES"
+85128 0 0 "Skip?"
+85129 0 0 "Grinding way:"
+
+
+
+;MASK7:帮助///////
+
+
+
+
+
+
+
+
+
+
+
+
+
+

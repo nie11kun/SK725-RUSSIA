@@ -1,0 +1,15 @@
+IF DUO[20]<DUO[21] GOTOF ERROR1
+R299= (60000*R223)/ ($PI*DUO[20]) ;多线修整时转速
+GOTOF END
+ERROR1:MSG("Diameter of wheel is small of"<<DUO[21]<<"mm  Please change the new wheel!!!")
+END2:
+G4 F900000
+END:
+M17
+
+
+
+
+
+
+

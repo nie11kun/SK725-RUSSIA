@@ -1,0 +1,96 @@
+L4000
+IF R0==-1 GOTOF LEFT
+;右螺纹
+RIGHT:
+MSG("Note：Began to adjusting-tool  Please open the DRF！") 
+G4 F5
+R14=0
+R60=0  ;C
+R61=0  ;B
+R191=R11
+N10 R192=0  ;对刀次数
+N20 G90 G00 C=R17  ;C走起点
+        B=R18  ;B走起点;此时BC不走联动
+        Z=R15  ;Z走起点 
+G90 G01 X=R191+R13 F800  ;X轴走到对刀值
+N50 R192=R192+1
+MSG("The No."<<R192<<" of adjusting-tool")
+N70 G90 G01 X=R191 F800 
+TRAILON(B,C,KEY)
+G91 G01 X=X_DIS Z=-Z_DIS C=C_RUN F=R101*360 ;此句走插补,对刀时锥度不走
+STOPRE
+R14=$AC_DRF[X]        ;X轴当前坐标
+R60=$AC_DRF[C] 
+R67=$AC_DRF[Z] 
+STOPRE
+G01 G91 X=R13 F1000
+TRAILOF(B,C)
+G90 G00 C=R17  ;C走起点
+        B=R18  ;B走起点;此时BC不走联动
+        Z=R15  ;Z走起点 
+IF $A_DBB[1]==1 GOTOB N50        ;判断对刀是否结束
+G90 G01 X=R12 F800
+MSG("End to adjusting-tool  Please close the handwheel and DRF！")
+G4 F3
+DRFOF
+GOTOF END
+;左螺纹
+LEFT:
+MSG("Note：Began to adjusting-tool  Please open the DRF！") 
+G4 F5
+R14=0
+R60=0  ;C
+R61=0  ;B
+R191=R11
+N110 R192=0  ;对刀次数
+N120 G90 G00 C=R17  ;C走起点
+        B=R18      ;B走起点;此时BC不走联动
+        Z=R16      ;Z走起点 
+G90 G01 X=R191+R13 F800  ;X轴走到对刀值
+N150 R192=R192+1
+MSG("The No."<<R192<<" of adjusting-tool")
+N170 G90 G01 X=R191 F800 
+TRAILON(B,C,KEY)
+G64 G91 G01 X=X_DIS Z=Z_DIS C=C_RUN F=R101*360 ;此句走插补,锥
+STOPRE
+R14=$AC_DRF[X]        ;X轴当前坐标
+R60=$AC_DRF[C] 
+R67=$AC_DRF[Z] 
+STOPRE
+G01 G91 X=R13 F1000
+TRAILOF(B,C)
+G90 G00 C=R17  ;C走起点
+        B=R18  ;B走起点;此时BC不走联动
+        Z=R16  ;Z走起点 
+IF $A_DBB[1]==1 GOTOB N150        ;判断对刀是否结束
+G90 G01 X=R12 F800
+MSG("End to adjusting-tool  Please close the handwheel and DRF！")
+G4 F3
+DRFOF
+END: 
+R15=R15+R67
+R16=R16+R67
+R17=R17+R60
+IF R17<0
+R17=360+R17
+ELSE
+  IF R17>=360
+  R17=R17-360
+  ELSE
+  R17=R17
+  ENDIF
+ENDIF
+STOPRE
+R18=R18+R61
+IF R18<0
+R18=360+R18
+ELSE
+  IF R18>=360
+  R18=R18-360
+  ELSE
+  R18=R18
+  ENDIF
+ENDIF
+M17
+
+

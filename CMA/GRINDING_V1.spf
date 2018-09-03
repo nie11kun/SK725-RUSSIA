@@ -1,0 +1,64 @@
+L4000
+STOPRE
+M13
+IF R0==-1 GOTOF LEFT
+;右螺纹
+RIGHT:
+G90 G00 C=R17
+        B=R18  ;此时BC不走联动
+        Z=R15
+G90 G00 X=R190+R13   ;X轴走到(对刀值+磨削退刀距离)
+R196=0
+N100 R196=R196+1
+C_START=R17+(360/R8)*(R196-1)
+G90 G00 C=C_START
+        B=R18  ;此时BC不走联动
+        Z=R15
+G90 G01 X=R190 F1400 ;X轴走到对刀值
+MSG("Grinding       "<<R196<<"HEAD        No. "<<R100<<"  The cutting depth is "<<R103<<"mm") ;当前为第几刀，进给深度
+G91 X=-R103 F=800   ;X轴进给深度 
+TRAILON(B,C,KEY)
+G91 G01 X=X_DIS Z=-Z_DIS C=C_RUN F=R101*360
+G91 G00 X=R13      ;退刀
+STOPRE
+TRAILOF(B,C)
+IF R196<R8 GOTOB N100
+R190=R190-R103
+G90 G00 Z=R15      ;Z轴回磨削起点
+G90 G01 C=R17 F=60*360    ;C轴回磨削起点
+        B=R18 F=60*360   ;B轴回磨削起点
+IF R105==0 GOTOF END  ;如果第几刀结束后不修整，跳结束
+DRESSING   ;修整
+GOTOF END
+
+;左螺纹
+LEFT:
+G90 G00 C=R17
+        B=R18  ;此时BC不走联动
+        Z=R16
+G90 G00 X=R190+R13   ;X轴走到(对刀值+磨削退刀距离)
+R196=0
+N1100 R196=R196+1
+C_START=R17+(360/R8)*(R196-1)
+G90 G00 C=C_START
+        B=R18  ;此时BC不走联动
+        Z=R16
+G90 G01 X=R190 F1400 ;X轴走到对刀值
+MSG("Grinding       "<<R196<<"HEAD        No. "<<R100<<"  The cutting depth is "<<R103<<"mm") ;当前为第几刀，进给深度
+G91 X=-R103 F=800   ;X轴进给深度 
+TRAILON(B,C,KEY)
+G91 G01 X=X_DIS Z=Z_DIS C=C_RUN F=R101*360
+G91 G00 X=R13      ;退刀
+STOPRE
+TRAILOF(B,C)
+IF R196<R8 GOTOB N1100
+R190=R190-R103
+G90 G00 Z=R16      ;Z轴回磨削起点
+G90 G01 C=R17 F=60*360    ;C轴回磨削起点
+        B=R18 F=60*360   ;B轴回磨削起点
+IF R105==0 GOTOF END  ;如果第几刀结束后不修整，跳结束
+DRESSING   ;修整
+END: 
+M17
+
+
