@@ -97,7 +97,7 @@
 85037 0 0 "Right"
 85038 0 0 "Grinding"
 85039 0 0 "Adjust"
-85041 0 0 ""
+85041 0 0 "skip：C adjust[deg]"
 85042 0 0 "Unit"
 85043 0 0 "mm"
 85044 0 0 "inch"
