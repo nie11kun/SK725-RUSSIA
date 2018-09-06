@@ -61,8 +61,9 @@ ELSE
 ENDIF
 N110 MSG("right: processing "<<R241<<"times of dressing, "<<R222-R241<<"times left, Depth of cut is "<< R221<<"mm")
 TRANS V=R78 W=R261
-G90 G1 V1 F1000
-W0
+G90 G1 V0 F1000
+W2 F500
+W0 F30
 V0 F=R220
 G91 G64 G02 V=-R249 W=-R248 CR=R94+R86 F=R220  
 G01 V=-R255 W=-R257
