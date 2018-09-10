@@ -7,11 +7,16 @@ B_MACHINE_INI;机床初始化
 
 B_RING_GROOVE;环形槽
 
-INI[159]=1;第一槽
-WHILE(INI[159]<=INI[116])
+INI[159]=INI[158]
+
+IF $A_DBB[0]==0
+    WHILE(INI[159]<=INI[158]+INI[116]-1)
+        B_SCREW;磨削主程序
+        INI[159]=INI[159]+1
+    ENDWHILE
+ELSE
     B_SCREW;磨削主程序
-    INI[159]=INI[159]+1
-ENDWHILE
+ENDIF
 
 ENDING:
 
