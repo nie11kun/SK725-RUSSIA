@@ -6,12 +6,18 @@ ENDIF
 FIRST:
 IF DUO[20]<DUO[21] GOTOF ERROR1
 R299= (60000*R102)/ ($PI*DUO[20]) ;ĥ��ʱת��
+G4 F0.2
+M13
+
 GOTOF END
 ERROR1:MSG("Diameter of wheel is small than "<<DUO[21]<<"mm  Please setup a new wheel!!!")
 END1:G4 F900000
 SECOND:
 IF R82<R83 GOTOF ERROR2
 R299= (60000*R102)/ ($PI*R82) ;ĥ��ʱת��
+G4 F0.2
+M13
+
 ENDIF
 GOTOF END
 ERROR2:MSG("Diameter of wheel is small than "<<R83<<"mm  Please setup a new wheel!!!")

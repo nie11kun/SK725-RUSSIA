@@ -1,6 +1,6 @@
 L4000
 STOPRE
-M13
+;M13
 IF R0==-1 GOTOF LEFT
 ;������
 RIGHT:

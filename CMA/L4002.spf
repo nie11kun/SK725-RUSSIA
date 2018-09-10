@@ -1,5 +1,8 @@
 IF DUO[20]<DUO[21] GOTOF ERROR1
 R299= (60000*R223)/ ($PI*DUO[20]) ;��������ʱת��
+G4 F0.2
+M13
+
 GOTOF END
 ERROR1:MSG("Diameter of wheel is small than "<<DUO[21]<<"mm  Please setup a new wheel!!!")
 END2:
