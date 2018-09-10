@@ -6,19 +6,19 @@ PROC E_CYCLE_MESSAGE DISPLOF
 
 CASE PROCESS[2] OF 0 GOTOF MESSAGE_0 1 GOTOF MESSAGE_1 2 GOTOF MESSAGE_2 3 GOTOF MESSAGE_3 4 GOTOF MESSAGE_4 DEFAULT GOTOF MESSAGE_5
 MESSAGE_0:;粗磨信息
-MSG("rough-->processing: "<<TECH_TIME[0]<<"times, "<<TECHNOLOGY[10]-TECH_TIME[0]<<"times left, feed: "<<PROCESS[8]<<"mm");
+MSG("rough-->processing: "<<INI[159]<<"SLOT, "<<TECH_TIME[0]<<"times, "<<TECHNOLOGY[10]-TECH_TIME[0]<<"times left, feed: "<<PROCESS[8]<<"mm");
 GOTOF MESSAGE_5
 ;
 MESSAGE_1:;半精磨信息
-MSG("mediun fine-->processing: "<<TECH_TIME[1]<<"times, "<<TECHNOLOGY[11]-TECH_TIME[1]<<"times left, feed:"<<PROCESS[8]<<"mm");
+MSG("mediun fine-->processing: "<<INI[159]<<"SLOT, "<<TECH_TIME[1]<<"times, "<<TECHNOLOGY[11]-TECH_TIME[1]<<"times left, feed:"<<PROCESS[8]<<"mm");
 GOTOF MESSAGE_5
 ;
 MESSAGE_2:;精磨信息
-MSG("fine-->processing: "<<TECH_TIME[2]<<"times, "<<TECHNOLOGY[12]-TECH_TIME[2]<<"times left, feed:"<<PROCESS[8]<<"mm");
+MSG("fine-->processing: "<<INI[159]<<"SLOT, "<<TECH_TIME[2]<<"times, "<<TECHNOLOGY[12]-TECH_TIME[2]<<"times left, feed:"<<PROCESS[8]<<"mm");
 GOTOF MESSAGE_5
 ;
 MESSAGE_3:;终磨信息
-MSG("finish-->processing: "<<TECH_TIME[3]<<"times, "<<TECHNOLOGY[13]-TECH_TIME[3]<<"times left, feed:"<<PROCESS[8]<<"mm");
+MSG("finish-->processing: "<<INI[159]<<"SLOT, "<<TECH_TIME[3]<<"times, "<<TECHNOLOGY[13]-TECH_TIME[3]<<"times left, feed:"<<PROCESS[8]<<"mm");
 GOTOF MESSAGE_5
 ;
 MESSAGE_4:;自定义磨削,信息显示

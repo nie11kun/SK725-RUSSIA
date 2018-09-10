@@ -7,7 +7,11 @@ B_MACHINE_INI;机床初始化
 
 B_RING_GROOVE;环形槽
 
-B_SCREW;磨削主程序
+INI[159]=1;第一槽
+WHILE(INI[159]<=INI[116])
+    B_SCREW;磨削主程序
+    INI[159]=INI[159]+1
+ENDWHILE
 
 ENDING:
 
