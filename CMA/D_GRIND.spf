@@ -14,7 +14,7 @@ INI[47]=1;磨削中不正常退出标记
 ;WHILE(INI[159]<=INI[116])
 
     ;MSG("到磨削起点")
-    G90 G01 Z=INI[6]-INI[4]*(INI[159]-1) F=100;Z轴到磨削起点
+    G90 G01 Z=INI[6]-INI[4]*(INI[159]-1) F=200;Z轴到磨削起点
     ;MSG("砂轮正在进入工件螺纹")
     G90 G01 X=PROCESS[4]+INI[15]*(INI[159]-1)+PROCESS[8]*4 F=500;快速到达磨削位置附近
     G90 G01 X=PROCESS[4]+INI[15]*(INI[159]-1)+PROCESS[8] F=50;快速到达磨削位置附近
@@ -22,7 +22,7 @@ INI[47]=1;磨削中不正常退出标记
     E_CYCLE_MESSAGE
     X=PROCESS[4]+INI[15]*(INI[159]-1) F=PROCESS[9];X进给
     G4 F2
-    G90 G01 X=PROCESS[16]-$AC_DRF[X] F=200
+    G90 G01 X=PROCESS[16]-$AC_DRF[X] F=500
     ;INI[159]=INI[159]+1
 
 ;ENDWHILE

@@ -9,7 +9,7 @@ G90 G01 X=POSITION-$AC_DRF[X] F=PROCESS[11]*4
 INI[47]=0;磨削中不正常退出标记
 MSG("go to start grinding position.")
 
-G01 Z=INI[6] F=INI[56]
+G01 Z=INI[6]-INI[4]*(INI[159]-1) F=INI[56]
 
 RET
 
