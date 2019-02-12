@@ -1,8 +1,15 @@
+DEF INT ARR[20],CLEAR,COUNT
+
 L4001
 STOPRE
 M13
 
-R296 = R18 + R295*R4
+FOR CLEAR = 0 TO 19
+    ARR[CLEAR]=0
+ENDFOR
+COUNT=0
+
+R296 = R18 + R295*R4;B轴起始角，考虑跳齿起始角度调整
 IF R296 >= 360
     R296 = R296-360
 ENDIF
@@ -10,7 +17,7 @@ IF R296 < 0
     R296 = R296+360
 ENDIF
 
-R294 = R17 + R295
+R294 = R17 + R295;C起始角，考虑跳齿起始角度调整
 IF R294 < 0
     R294 = R294 + 360
 ENDIF
@@ -18,8 +25,11 @@ IF R294 >= 360
     R294 = R294 - 360
 ENDIF
 
-R197=ROUNDUP(Z_DIS/R1)*R4
-R198=ZHUIDU*R1/R4
+;-------------------------------------
+
+R197=ROUNDUP(Z_DIS/R1);总圈数
+
+R198=ZHUIDU*R1/R4;每槽X偏移
 
 IF R0==-1 GOTOF LEFT
 
@@ -30,33 +40,63 @@ G90 G00 C=R294
 G90 G00 X=R190+R13   ;磨削对刀值+磨削时退刀距离
 MSG("processing "<<R100<<"times, The feed depth is "<<R103<<"mm")
 
-R195=0
-G90 G01 X=R190+R13-R103 F=800
+G90 G01 X=R190+R13-R103 F=800;到达不跳齿位置
 
-N100 R195=R195+1
+;---------------------------------------------
 
-IF (R195/2-TRUNC(R195/2)==0)
-    G91 G01 X=R13 F500
-    R201=1
-ELSE
-    G91 G01 X=-R13 F500
-    R201=-1  
-ENDIF
+FOR R201 = 1 TO R197;圈累计
+    FOR R202 = 1 TO R4;槽累计
+        R203=R202+R4;第二圈的槽
 
-TRAILON(B,C,KEY)
-G64 G91 G01 X=R198 Z=-R1/R4-R201*(R199/360)*R1*2 C=360/R4+R201*R199*2 F=R101*360
-G4 F0.1
+        IF (ARR[R203-1]==0) AND (ARR[R203-R4]==0);前一个和前一圈的都不跳
+            ARR[R203]=1;抬刀跳过
 
+            G90 G01 X=R190+R13-R103+R198*COUNT F=200;不跳齿位置
+            G4 F0.1
+            TRAILON(B,C,KEY)
+            G64 G91 G01 X=R198 Z=-R1/R4 C=360/R4 F=R101*360;插补走过一个槽
+            COUNT=COUNT+1
+            G4 F0.1
+            STOPRE
+            TRAILOF(B,C)
+
+        ELSE
+            ARR[R203]=0;进刀去齿
+
+            G90 G01 X=R190+R13-R103+R198*COUNT F=200;不跳齿位置
+            TRAILON(B,C,KEY)
+            G91 G01 G64 Z=-(R199/360)*R1 C=R199 F50;走过跳齿微调角度
+            G91 G01 X=-R13 F=100;进入跳齿位置
+            G4 F0.1
+            G64 G91 G01 X=R198 Z=-R1/R4+(R199/360)*R1*2 C=360/R4-R199*2 F=R101*360;插补走过一个槽
+            COUNT=COUNT+1
+            G90 G01 X=R190+R13-R103+R198*COUNT F=200;不跳齿位置
+            G91 G01 G64 Z=-(R199/360)*R1 C=R199 F50;走过跳齿微调角度
+            G4 F0.1
+            STOPRE
+            TRAILOF(B,C)
+
+        ENDIF
+
+        STOPRE
+    ENDFOR
+
+    FOR R204 = (R4+1) TO (R4*2);后一圈数据移动到前一圈
+        ARR[R204-R4]=ARR[R204]
+    ENDFOR
+
+ENDFOR
+
+;--------------------------------------------------
 STOPRE
-TRAILOF(B,C)
-IF R195<R197 GOTOB N100
-STOPRE
 
-R190=R190-R103
+R190=R190-R103;磨削对刀值累计
+
 G91 G00 X=R13
 G90 G00 Z=R15-R295/360*R1
 G90 G01 C=R294 F=60*360
         B=R296
+
 IF R105==0 GOTOF END
 DRESSING
 GOTOF END
@@ -69,33 +109,64 @@ G90 G00 C=R294
 G90 G00 X=R190+R13
 MSG("processing "<<R100<<"times, The feed depth is "<<R103<<"mm")
 
-R195=0
-G90 G01 X=R190+R13-R103 F=800
 
-N1100 R195=R195+1
+G90 G01 X=R190+R13-R103 F=800;到达不跳齿位置
 
-IF (R195/2-TRUNC(R195/2)==0)
-    G91 G01 X=R13 F500
-    R201=1
-ELSE
-    G91 G01 X=-R13 F500
-    R201=-1
-ENDIF
+;---------------------------------------------
 
-TRAILON(B,C,KEY)
-G64 G91 G01 X=R198 Z=R1/R4+R201*(R199/360)*R1*2 C=360/R4+R201*R199*2 F=R101*360
-G4 F0.1
+FOR R201 = 1 TO R197;圈累计
+    FOR R202 = 1 TO R4;槽累计
+        R203=R202+R4;第二圈的槽
 
+        IF (ARR[R203-1]==0) AND (ARR[R203-R4]==0);前一个和前一圈的都不跳
+            ARR[R203]=1;抬刀跳过
+
+            G90 G01 X=R190+R13-R103+R198*COUNT F=200;不跳齿位置
+            G4 F0.1
+            TRAILON(B,C,KEY)
+            G64 G91 G01 X=R198 Z=R1/R4 C=360/R4 F=R101*360;插补走过一个槽
+            COUNT=COUNT+1
+            G4 F0.1
+            STOPRE
+            TRAILOF(B,C)
+
+        ELSE
+            ARR[R203]=0;进刀去齿
+
+            G90 G01 X=R190+R13-R103+R198*COUNT F=200;不跳齿位置
+            TRAILON(B,C,KEY)
+            G91 G01 G64 Z=(R199/360)*R1 C=R199 F50;走过跳齿微调角度
+            G91 G01 X=-R13 F=100;进入跳齿位置
+            G4 F0.1
+            G64 G91 G01 X=R198 Z=R1/R4-(R199/360)*R1*2 C=360/R4-R199*2 F=R101*360;插补走过一个槽
+            COUNT=COUNT+1
+            G90 G01 X=R190+R13-R103+R198*COUNT F=200;不跳齿位置
+            G91 G01 G64 Z=(R199/360)*R1 C=R199 F50;走过跳齿微调角度
+            G4 F0.1
+            STOPRE
+            TRAILOF(B,C)
+
+        ENDIF
+
+        STOPRE
+    ENDFOR
+
+    FOR R204 = (R4+1) TO (R4*2);后一圈数据移动到前一圈
+        ARR[R204-R4]=ARR[R204]
+    ENDFOR
+
+ENDFOR
+
+;--------------------------------------------------
 STOPRE
-TRAILOF(B,C)
-IF R195<R197 GOTOB N1100
-STOPRE
 
-R190=R190-R103
+R190=R190-R103;磨削对刀值累计
+
 G91 G00 X=R13
 G90 G00 Z=R16+R295/360*R1
 G90 G01 C=R294 F=60*360
         B=R296
+
 IF R105==0 GOTOF END
 DRESSING
 
