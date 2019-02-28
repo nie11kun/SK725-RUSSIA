@@ -33,6 +33,12 @@ MSG("processing "<<R100<<"times, The feed depth is "<<R103<<"mm")
 R195=0
 G90 G01 X=R190+R13-R103 F=800;到达不跳齿位置
 
+IF R4==4;4槽
+    G90 G01 X=R190-R103 F=500;到达跳齿位置
+ENDIF
+
+STOPRE
+
 N100 R195=R195+1
 
 IF R4<>4;非4槽
@@ -56,6 +62,7 @@ ELSE
         G4 F0.1
     ELSE
         G91 G01 X=R13 F500
+        STOPRE
         R195=R195+1
         G4 F0.1
         TRAILON(B,C,KEY)
@@ -89,6 +96,12 @@ MSG("processing "<<R100<<"times, The feed depth is "<<R103<<"mm")
 R195=0
 G90 G01 X=R190+R13-R103 F=800
 
+IF R4==4;4槽
+    G90 G01 X=R190-R103 F=500;到达跳齿位置
+ENDIF
+
+STOPRE
+
 N1100 R195=R195+1
 
 IF R4<>4;非4槽
@@ -112,6 +125,7 @@ ELSE
         G4 F0.1
     ELSE
         G91 G01 X=R13 F500
+        STOPRE
         R195=R195+1
         G4 F0.1
         TRAILON(B,C,KEY)
