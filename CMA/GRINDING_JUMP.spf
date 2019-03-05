@@ -33,8 +33,11 @@ MSG("processing "<<R100<<"times, The feed depth is "<<R103<<"mm")
 R195=0
 G90 G01 X=R190+R13-R103 F=800;到达不跳齿位置
 
+STOPRE
+
 IF R4==4;4槽
-    G90 G01 X=R190-R103 F=500;到达跳齿位置
+    R195=2
+    R197=R197+2
 ENDIF
 
 STOPRE
@@ -96,8 +99,11 @@ MSG("processing "<<R100<<"times, The feed depth is "<<R103<<"mm")
 R195=0
 G90 G01 X=R190+R13-R103 F=800
 
+STOPRE
+
 IF R4==4;4槽
-    G90 G01 X=R190-R103 F=500;到达跳齿位置
+    R195=2
+    R197=R197+2
 ENDIF
 
 STOPRE
@@ -149,3 +155,4 @@ DRESSING
 
 END: 
 M17
+
