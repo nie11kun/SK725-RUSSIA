@@ -6,7 +6,7 @@ PROC D_GRIND DISPLOF
 
 ;INI[159]=1;
 
-M3 S=INI[117];
+DO MOV[C]=1 FA[C]=INI[117]*360;
 G4 F1;
 
 INI[47]=1;磨削中不正常退出标记
