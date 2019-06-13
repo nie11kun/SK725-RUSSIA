@@ -269,6 +269,30 @@ DEF VAR405=(R/0,//,,,/WR2//"/Channel/Parameter/r[u1,114]"/0,0,0/480,320,55/,4),
 
 ;DEF Line10=(S////wr1////7,164,175,4/,5/);横
 
+DEF AMOUNT_FEED=(R///$85087,$85087,,/WR1///10,20,110/90,20,60/6)
+
+DEF VAR75=(I////WR4//"/Channel/Parameter/r[u1,120]"/0,0,0/0,0,0/),
+DEF VAR78=(R////WR4//"/Channel/Parameter/r[u1,123]"/0,0,0/0,0,0/),
+DEF VAR84=(I////WR4//"/Channel/Parameter/r[u1,130]"/0,0,0/0,0,0/),
+DEF VAR87=(R////WR4//"/Channel/Parameter/r[u1,133]"/0,0,0/0,0,0/),
+DEF VAR93=(I////WR4//"/Channel/Parameter/r[u1,140]"/0,0,0/0,0,0/),
+DEF VAR96=(R////WR4//"/Channel/Parameter/r[u1,143]"/0,0,0/0,0,0/),
+DEF VAR102=(I////WR4//"/Channel/Parameter/r[u1,150]"/0,0,0/0,0,0/),
+DEF VAR105=(R////WR4//"/Channel/Parameter/r[u1,153]"/0,0,0/0,0,0/),
+DEF VAR111=(I////WR4//"/Channel/Parameter/r[u1,160]"/0,0,0/0,0,0/),
+DEF VAR114=(R////WR4//"/Channel/Parameter/r[u1,163]"/0,0,0/0,0,0/),
+
+DEF VAR120=(I////WR4//"/Channel/Parameter/r[u1,170]"/0,0,0/0,0,0/),
+DEF VAR123=(R////WR4//"/Channel/Parameter/r[u1,173]"/0,0,0/0,0,0/),
+DEF VAR129=(I////WR4//"/Channel/Parameter/r[u1,180]"/0,0,0/0,0,0/),
+DEF VAR132=(R////WR4//"/Channel/Parameter/r[u1,183]"/0,0,0/0,0,0/),
+DEF VAR211=(I////WR4//"DAO1[0]"/0,0,0/0,0,0/),
+DEF VAR214=(R////WR4//"DAO1[3]"/0,0,0/0,0,0/),
+DEF VAR221=(I////WR4//"DAO2[0]"/0,0,0/0,0,0/),
+DEF VAR224=(R////WR4//"DAO2[3]"/0,0,0/0,0,0/),
+DEF VAR231=(I////WR4//"DAO3[0]"/0,0,0/0,0,0/),
+DEF VAR234=(R////WR4//"DAO3[3]"/0,0,0/0,0,0/),
+
 HS1=($85001);"基本数据1"
 HS2=($85002);"基本数据2"
 HS3=($85003,se3);"磨削参数"
@@ -340,6 +364,7 @@ END_PRESS
 ;---------------------------------------
 ;第1刀显示或隐藏
 CHANGE(VAR30)
+CALL("UP1")
 IF VAR30.VAL==0
 VAR31.WR=0
 VAR32.WR=0
@@ -366,6 +391,7 @@ END_CHANGE
 ;---------------------------------------
 ;第2刀显示或隐藏
 CHANGE(VAR39)
+CALL("UP1")
 IF VAR39.VAL==0
 VAR40.WR=0
 VAR41.WR=0
@@ -391,6 +417,7 @@ END_CHANGE
 ;--------------------------------------
 ;第3刀显示或隐藏
 CHANGE(VAR48)
+CALL("UP1")
 IF VAR48.VAL==0
 VAR49.WR=0
 VAR50.WR=0
@@ -416,6 +443,7 @@ END_CHANGE
 ;--------------------------------------
 ;第4刀显示或隐藏
 CHANGE(VAR57)
+CALL("UP1")
 IF VAR57.VAL==0
 VAR58.WR=0
 VAR59.WR=0
@@ -441,6 +469,7 @@ END_CHANGE
 ;--------------------------------------
 ;第5刀显示或隐藏
 CHANGE(VAR66)
+CALL("UP1")
 IF VAR66.VAL==0
 VAR67.WR=0
 VAR68.WR=0
@@ -464,6 +493,30 @@ VAR405.WR=2
 ENDIF
 END_CHANGE
 ;--------------------------------------
+
+CHANGE(VAR33)
+	CALL("UP1")
+END_CHANGE
+
+CHANGE(VAR42)
+	CALL("UP1")
+END_CHANGE
+
+CHANGE(VAR51)
+	CALL("UP1")
+END_CHANGE
+
+CHANGE(VAR60)
+	CALL("UP1")
+END_CHANGE
+
+CHANGE(VAR69)
+	CALL("UP1")
+END_CHANGE
+
+SUB(UP1)
+	AMOUNT_FEED.VAL=(VAR30.VAL*VAR33.VAL+VAR39.VAL*VAR42.VAL+VAR48.VAL*VAR51.VAL+VAR57.VAL*VAR60.VAL+VAR66.VAL*VAR69.VAL)+(VAR75.VAL*VAR78.VAL+VAR84.VAL*VAR87.VAL+VAR93.VAL*VAR96.VAL+VAR102.VAL*VAR105.VAL+VAR111.VAL*VAR114.VAL)+(VAR120.VAL*VAR123.VAL+VAR129.VAL*VAR132.VAL+VAR211.VAL*VAR214.VAL+VAR221.VAL*VAR224.VAL+VAR231.VAL*VAR234.VAL)
+END_SUB
 
 //END
 
